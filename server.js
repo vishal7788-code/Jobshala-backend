@@ -36,5 +36,4 @@ app.use("/api/v1/application", applicationRoute);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   connectDB();
-  console.log(`Server is running on http://localhost:${PORT}`);
 });
