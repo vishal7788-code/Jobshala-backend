@@ -8,32 +8,30 @@ import companyRoute from "./routes/company.route.js";
 import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
 
-dotenv.config();
-
 const app = express();
+dotenv.config({});
 
-// Middleware
+//middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-// Correctly configure CORS
 const corsOptions = {
-  origin: "https://jobshala-project.vercel.app" 
-  credentials: true, 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  allowedHeaders: ['Content-Type', 'Authorization'], 
+  origin: "https://jobshala-project.vercel.app",
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); 
 
-// Routes
+const PORT = process.env.PORT || 3000;
+
+//api's
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-// Connect to DB and start server
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   connectDB();
-});
+ 
