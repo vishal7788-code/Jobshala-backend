@@ -34,4 +34,5 @@ app.use("/api/v1/application", applicationRoute);
 
 app.listen(PORT, () => {
   connectDB();
-};
+})
+  ;
